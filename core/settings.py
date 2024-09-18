@@ -42,14 +42,17 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'users',
     'essays',
+    'drf_spectacular'
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS':"drf_spectacular.openapi.AutoSchema"
 }
 
+SPECTACULAR_SETTINGS = {"TITLE":"Django drf bloggy"}
 
 from datetime import timedelta
 

@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Django drf bloggy
+  version: 0.0.0
+paths:
+  /essays/detail/{id}:
+    get:
+      operationId: essays_detail_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - essays
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    put:
+      operationId: essays_detail_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - essays
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: essays_detail_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - essays
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /essays/list/:
+    get:
+      operationId: essays_list_retrieve
+      tags:
+      - essays
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: essays_list_create
+      tags:
+      - essays
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /essays/user-views/{id}:
+    get:
+      operationId: essays_user_views_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - essays
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /users/all/:
+    get:
+      operationId: users_all_retrieve
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /users/login/:
+    post:
+      operationId: users_login_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /users/logout/:
+    post:
+      operationId: users_logout_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /users/register/:
+    post:
+      operationId: users_register_create
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /users/user/:
+    get:
+      operationId: users_user_retrieve
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+components:
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

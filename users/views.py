@@ -1,7 +1,5 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserSerializer
-from .models import User
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -9,10 +7,15 @@ from rest_framework import status
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.serializers import TokenBlacklistSerializer
 
+from .serializers import UserSerializer, LoginSerializer
+from .models import User
+
+from drf_spectacular.utils import extend_schema
 
 class UserList(APIView):
     permission_classes = [IsAuthenticated]
 
+    @extend_schema(responses=UserSerializer)
     def get(self, request, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
@@ -21,6 +24,14 @@ class UserList(APIView):
 class RegisterAPIView(APIView):
     permission_classes = [AllowAny]
 
+    @extend_schema(
+        request=
+            { 
+            'application/json': UserSerializer, 
+            'multipart/form-data': UserSerializer  
+            },
+        responses=UserSerializer
+    )
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -37,6 +48,14 @@ class RegisterAPIView(APIView):
 class LoginAPIView(APIView):
     permission_classes = [AllowAny]
 
+    @extend_schema(
+        request=
+            { 
+            'application/json': LoginSerializer, 
+            'multipart/form-data': LoginSerializer  
+            },
+        responses=UserSerializer
+    )
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
@@ -61,6 +80,7 @@ class LoginAPIView(APIView):
 class UserAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @extend_schema(responses=UserSerializer)
     def get(self, request, pk=None):
         if pk:
             user = User.objects.get(pk=pk)
@@ -71,6 +91,7 @@ class UserAPIView(APIView):
 
 
 class LogoutAPIView(APIView):
+    @extend_schema(responses=UserSerializer)
     def post(self, request, *args, **kwargs):
         refresh_token = request.data.get('refresh')
 

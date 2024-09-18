@@ -8,5 +8,4 @@ class EssaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Essay
-        fields = '__all__'
-        
+        fields = ['id', 'title', 'content', 'image', 'author', 'created_at', 'updated_at']

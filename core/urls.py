@@ -23,7 +23,8 @@ from core import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
-    path('essays/', include('essays.urls'))
+    path('essays/', include('essays.urls')),
+    path('search/', include('search.urls'))
 ]
 
 if settings.DEBUG:

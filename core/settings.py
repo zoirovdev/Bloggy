@@ -52,7 +52,10 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS':"drf_spectacular.openapi.AutoSchema"
 }
 
-SPECTACULAR_SETTINGS = {"TITLE":"Django drf bloggy"}
+SPECTACULAR_SETTINGS = {
+    "TITLE":"Django drf bloggy",
+    "COMPONENT_SPLIT_REQUEST": True,
+}
 
 from datetime import timedelta
 

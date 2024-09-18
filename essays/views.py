@@ -39,11 +39,11 @@ class EssayDetail(APIView):
 
     @extend_schema(
         request=
-            { 
+        { 
             'application/json': EssaySerializer, 
             'multipart/form-data': EssaySerializer  
-            },
-        responses=EssaySerializer
+        },
+        responses=EssaySerializer,
     )
     def put(self, request, pk):
         essay = Essay.objects.get(pk=pk)

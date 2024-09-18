@@ -21,7 +21,7 @@ COPY . /app/
 EXPOSE 8000
 
 # Define environment variable
-ENV DJANGO_SETTINGS_MODULE=myproject.settings
+ENV DJANGO_SETTINGS_MODULE=core.settings
 
 # Run Django's development server
-CMD ["gunicorn", "bloggy.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]

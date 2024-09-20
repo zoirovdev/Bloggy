@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -90,7 +91,7 @@ class UserAPIView(APIView):
         return Response(serializer.data)
 
 
-class LogoutAPIView(APIView):
+class LogoutAPIView(GenericAPIView):
     def post(self, request, *args, **kwargs):
         refresh_token = request.data.get('refresh')
 

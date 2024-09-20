@@ -91,7 +91,6 @@ class UserAPIView(APIView):
 
 
 class LogoutAPIView(APIView):
-    @extend_schema(responses=UserSerializer)
     def post(self, request, *args, **kwargs):
         refresh_token = request.data.get('refresh')
 
